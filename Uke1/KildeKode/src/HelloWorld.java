@@ -4,7 +4,7 @@ public class HelloWorld {
         System.out.println("Hello World");
         System.out.println();
 
-        System.out.println("Telle til ti");
+        System.out.println("Telle til ti:");
         for (int i = 1; i <= 10; ++i){
             System.out.print(i + " ");
         }
