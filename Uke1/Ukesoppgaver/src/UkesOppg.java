@@ -52,7 +52,7 @@ public class UkesOppg {
         int m = 0;
 
         for (int i = 1; i < a.length; ++i){
-            if (a[i] < a[m]){ //Hvis tallet i rekken er mindre
+            if (a[i] < a[m]){ //Hvis tallet i rekken er mindre så settes m lik indeksen
                 m = i;
             }
         }
