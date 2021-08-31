@@ -1,9 +1,8 @@
-
 /**
  * Windows: [alt] + [enter] mens du holder på klassen for å lage tester
  * Mac: [option] + [enter] --"--
  */
-public class AlgDat24aug {
+public class KildeKode {
 
     public static void main(String[] args) {
         System.out.println("Hello algdat");
@@ -31,9 +30,8 @@ public class AlgDat24aug {
             int temp = values[k];
             values[k] = values[max_index];
             values[max_index] = temp;
-    System.out.println();
+
             System.out.println("Bytter plass " + k + " med plass " + max_index);
-    System.out.println();
             System.out.println("Arrayet etter ombytting");
             for (int i = 0; i < values.length; ++i) {
                 System.out.print(values[i] + ", ");
