@@ -246,7 +246,7 @@ public class Tabell {
 
 //1.2.4
 
-//OPPG 1
+//OPPG 2
         public static int[] nestMaks (int[] a){
 
 
@@ -265,4 +265,133 @@ public class Tabell {
 
             return new int[] {maks, nestMaks}; //Returnerer et array med maks først
         }
+
+//OPPG 3
+        public static int[] nestMaks1(int[] a){
+            if (a.length < 2){
+                throw new NoSuchElementException("" +
+                        "Tabellen må ha 2 verdier");
+            }
+
+            int maks = maks(a);
+
+            bytt(a, maks, a.length-1);
+
+            int nestMaks = maks(a, 0, a.length-1);
+
+            bytt(a, a.length-1, maks);
+
+            return new int[] {maks, nestMaks};
+        }
+
+//OPPG 4
+        public static void sorteringAsc(int[] a){
+            if (a.length < 2){
+                throw new NoSuchElementException("Må ha flere enn ett tall");
+            }
+
+            for (int i = a.length-1; i > 0; --i) {
+                int maks = maks(a, 0, i);
+
+                bytt(a, maks, i);
+            }
+            //Må implementere denne fordi for-løkken vil ikke gå gjennom kontrollen i maks
+            //funksjonen
+            if (a[0] > a[1]){
+                bytt(a,0,1);
+            }
+
+            for (int tall : a)
+            System.out.print(tall + " ");
+        }
+
+//1.2.6
+
+//OPPG 1
+
+    public static int[] nestMaksBokaEx(int[] a) // ny versjon
+    {
+        int n = a.length;     // tabellens lengde
+        if (n < 2) throw      // må ha minst to verdier
+                new java.util.NoSuchElementException("a.length(" + n + ") < 2!");
+
+        int m = 0;      // m er posisjonen til største verdi
+        int nm = 1;     // nm er posisjonen til nest største verdi
+
+        // bytter om m og nm hvis a[1] er større enn a[0]
+        if (a[1] > a[0]) { m = 1; nm = 0; }
+
+        int maksverdi = a[m];                // største verdi
+        int nestmaksverdi = a[nm];           // nest største verdi
+
+        int antallop = 1;
+
+        for (int i = 2; i < n; i++)
+        {
+            antallop++;
+
+            if (a[i] > nestmaksverdi)
+            {
+                antallop++;
+
+                if (a[i] > maksverdi)
+                {
+                    nm = m;
+                    nestmaksverdi = maksverdi;     // ny nest størst
+
+                    m = i;
+                    maksverdi = a[m];// ny størst
+
+                    antallop++;
+
+                }
+                else
+                {
+                    nm = i;
+                    nestmaksverdi = a[nm];// ny nest størst
+
+                }
+            }
+        } // for
+
+        return new int[] {m,nm, antallop};    // n i posisjon 0, nm i posisjon 1
+
+    } // nestMaks
+
+
+
+
+
+//1.2.13
+    //TURNERINGTRE FULLSTENDIG
+
+    public static int[] turneringstre(int[] a)   // en turnering
+    {
+        int n = a.length;                // for å forenkle notasjonen
+
+        if (n < 2) // må ha minst to verdier!
+            throw new IllegalArgumentException("a.length(" + n + ") < 2!");
+
+        int[] b = new int[2*n];          // turneringstreet
+        System.arraycopy(a,0,b,n,n);     // legger a bakerst i b
+
+        for (int k = 2*n-2; k > 1; k -= 2)   // lager turneringstreet
+            b[k/2] = Math.max(b[k],b[k+1]);
+
+        int maksverdi = b[1], nestmaksverdi = Integer.MIN_VALUE;
+
+        for (int m = 2*n - 1, k = 2; k < m; k *= 2)
+        {
+            int tempverdi = b[k+1];  // ok hvis maksverdi er b[k]
+            if (maksverdi != b[k]) { tempverdi = b[k]; k++; }
+            if (tempverdi > nestmaksverdi) nestmaksverdi = tempverdi;
+        }
+
+        for(int i : b){
+            System.out.print(i + " ");
+        }
+
+        return new int[] {maksverdi,nestmaksverdi}; // størst og nest størst
+
+    } // nestMaks
 }
